@@ -70,6 +70,10 @@
     @else
     <div class="alert alert-info" role="alert">
   Kamu sudah melakukan klaim waifu. 1 orang hanya diberi 1 kesempatan klaim waifu
+@if($pekalongan) 
+<br>
+<b>Kami mendeteksi adanya upaya kecurangan klaim waifu. Pekalongan lu!</b>
+@endif
 </div>
     @endif
     <hr>
@@ -110,13 +114,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <p class="card-title"><b>{{$waifu->nama}}</b> ({{$waifu->sumber}})</p>
+                        <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b> ({{$waifu->sumber ?? "N/A"}})</p>
                     </div>
                     <div class="col-12 col-md-4">
-                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Jumlah Klaim:</b></span>{{number_format($waifu->jumlah)}}</h5>
+                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Jumlah Klaim:</b></span>{{number_format($waifu->jumlah ?? 0)}}</h5>
                     </div>
                     <div class="col-12 col-md-4">
-                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Terakhir Diklaim:</b></span> {{$waifu->updated_at}}</h5>
+                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Terakhir Diklaim:</b></span> {{$waifu->updated_at ?? "Tidak Pernah"}}</h5>
                     </div>
                 </div>
 
