@@ -53,10 +53,13 @@ function googleimagewaifu() {
     //laravel jobs gak work queue work malah stuck. helper jadiin jobs
     $waifus = Waifu::get();
     foreach ($waifus as $waifu) {
-    fwrite(STDOUT, $waifu->nama . "\m");
-    
-    $waifu->gambar = waifuimg($waifu->nama,$waifu->sumber);
+   
+    if ($waifu->gambar == null) {
+        fwrite(STDOUT, $waifu->nama . "(" . $waifu->sumber.")". "\n");
+        $waifu->gambar = waifuimg($waifu->nama,$waifu->sumber);
         $waifu->save();
+    
+    }
     }
 }
 
