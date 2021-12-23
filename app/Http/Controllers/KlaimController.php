@@ -12,8 +12,10 @@ class KlaimController extends Controller
        $uip = $this->get_client_ip();
        $uua =  $_SERVER['HTTP_USER_AGENT'];
        $pekalongan = false;
-        $waifu = Waifu::orderBy('jumlah', 'desc')->take(50)->get();
-        
+        $waifu = Waifu::orderBy('jumlah', 'desc')->orderBy('updated_at', 'desc')->take(50)->get();
+        $waifulatest = Waifu::orderBy('updated_at', 'desc')->take(50)->get();
+      
+        $randomWaifu = Waifu::inRandomOrder()->take(1)->first();
         if (!session('sadap', false)) {
             $cekSadap = Sadap::where(["ip"=> $uip , "ua" => $uua])->where("waifu_id","!=",null)->first();
           
@@ -37,6 +39,8 @@ class KlaimController extends Controller
        
         return view('home',[
             "waifulist" => $waifu,
+            "waifulistlatest" => $waifulatest,
+            "randomWaifu" => $randomWaifu,
             "pekalongan" => $pekalongan,
         ]);
     }
@@ -68,7 +72,7 @@ class KlaimController extends Controller
                 'nama' => $nama,
                 'sumber' => $sumber,
                 'jumlah' => 1,
-                
+                'gambar' => waifuimg($nama,$sumber),
             ]);
             $waifu_id = $waifu->id;
         }
@@ -77,11 +81,11 @@ class KlaimController extends Controller
         if ($sadap_id) {
             $sadap = Sadap::where("id",$sadap_id)->first();
             if ($sadap) {
-                $sadap->waifu_id = $waifu->id ;
+                $sadap->waifu_id = $waifu_id ;
                 $sadap->save();
             }
         }
-       
+        $request->session()->flash('fromKlaim',true);
         session(['sudahklaim' => 'true']);
         return redirect("/");
     }

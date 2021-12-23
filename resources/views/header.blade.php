@@ -12,6 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="icon" href="https://himputek.id/wp-content/uploads/2021/12/cropped-PicsArt_11-18-09.17.19-scaled-e1639578353229-192x192.jpg" sizes="192x192">
     <title>Klaim Waifu himputek.id</title>
+    <script src="https://kit.fontawesome.com/48fd0d49d6.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <style>
       .container {
@@ -55,6 +57,24 @@
 }
 .h-300 {
     height:300px;
+}
+@media only screen and (max-width: 600px) {
+    .karakterimg {
+        background: rgba(255,255,255,1); 
+    background-size: cover !important;
+ background-position: 50% 50%; background-repeat: no-repeat;
+}
+}
+@media only screen and (min-width: 600px) {
+    .karakterimg {
+        background: rgba(255,255,255,1); 
+    background-size: contain !important;
+ background-position: 50% 50%; background-repeat: no-repeat;
+}
+}
+
+.karakterimgu {
+    background: rgba(0,0,0,0.6);    margin: -1px;
 }
       </style>
   <body class="bg-dark text-white">

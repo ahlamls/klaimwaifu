@@ -14,6 +14,7 @@ class Waifu extends Model
         'nama',
         'sumber',
         'jumlah',
+        'gambar',
       ];
 
 }

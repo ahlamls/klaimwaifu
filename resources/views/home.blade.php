@@ -1,5 +1,7 @@
 @include('header')
-
+<?php 
+$es = "";
+?>
 <nav class="navbar navbar-dark bg-black">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -41,14 +43,14 @@
         <div class="row">
             <div class="form-group col-12 col-md-3">
                 <label for="staticEmail" class="form-label">Nama Karakter</label>
-                <input maxlength="64" type="text" placeholder="Lumine" class="form-control" name="nama" id="namaKarakter">
+                <input maxlength="64" type="text" placeholder="{{$randomWaifu->nama ?? ''}}" class="form-control" name="nama" id="namaKarakter">
 
             </div>
 
 
             <div class="form-group col-12 col-md-4">
                 <label for="staticEmail" class="form-label">Anime/Game Karakter</label>
-                <input maxlength="64" name="sumber" type="text" placeholder="Genshin Impact" class="form-control" id="sumberKarakter">
+                <input maxlength="64" name="sumber"  type="text" placeholder="{{$randomWaifu->sumber ?? ''}}" class="form-control" id="sumberKarakter">
 
             </div>
 
@@ -77,7 +79,17 @@
 </div>
     @endif
     <hr>
-    <h2>Top Global Waifu : All Time</h2>
+   <ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active " id="topglobalnav" onclick="topglobal()">Top Global</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" id="latestnav" onclick="latest()">Terakhir diklaim</a>
+  </li>
+
+</ul>
+
+    <div class="p-3" id="topglobal">
     <!-- 
         Kalian Developer ingin parsing data dari sini
         silahkan gunakan api nya. udah format json . datanya sama persis kaya dibawah
@@ -85,56 +97,90 @@
      
         kalau gak bisa berarti udah saya matiin karena bikin overload server mungkin ?
     -->
-    <div class="p-3">
-    <div class="row p-3 d-none d-sm-block">
-        <div class="col-12 card text-white bg-dark mb-3" >
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-md-4">
-                        <h4 class="card-title">Karakter</h4>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h4 class="card-title">Jumlah Klaim</h4>
-                    </div>
-                    <div class="col-12 col-md-4">
-                        <h4 class="card-title">Terakhir diklaim</h4>
-                    </div>
-                </div>
-
-           
-            </div>
-        </div>
-
-    </div>
-
-   
     <div class="row" >
         @foreach ($waifulist as $waifu)
-        <div class="col-12 card text-black bg-light mb-3" >
-            <div class="card-body">
+        <div class="col-12 card text-white bg-black mb-3 p-0 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
+            <div class="card-body karakterimgu" >
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b> ({{$waifu->sumber ?? "N/A"}})</p>
+                        <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b><br> ({{$waifu->sumber ?? "N/A"}})</p>
                     </div>
                     <div class="col-12 col-md-4">
-                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Jumlah Klaim:</b></span>{{number_format($waifu->jumlah ?? 0)}}</h5>
+                        <h5 class="card-title"><span class="d-none d-sm-block">Jumlah Klaim:</span> <span class=" "><i class="   far fa-check-circle"></i> <b class=" d-sm-none">Jumlah Klaim: </b>{{number_format($waifu->jumlah ?? 0)}}</span></h5>
                     </div>
                     <div class="col-12 col-md-4">
-                        <h5 class="card-title"><span class="d-block d-sm-none"><b>Terakhir Diklaim:</b></span> {{$waifu->updated_at ?? "Tidak Pernah"}}</h5>
+                        <h5 class="card-title"><span class="d-none d-sm-block">Terakhir Diklaim:</span> <span class=""><i class="  far fa-clock"></i>  {{wib($waifu->updated_at) ?? "Tidak Pernah"}} WIB</span></h5>
                     </div>
                 </div>
-
-           
             </div>
         </div>
         @endforeach
+    </div>
+    </div>
 
+
+    <div class="p-3" id="latest" style="display:none">
+    <!-- 
+        Kalian Developer ingin parsing data dari sini
+        silahkan gunakan api nya. udah format json . datanya sama persis kaya dibawah
+        https://himputek.id/api/waifu
+     
+        kalau gak bisa berarti udah saya matiin karena bikin overload server mungkin ?
+    -->
+    <div class="row" >
+        @foreach ($waifulistlatest as $waifu)
+        <div class="col-12 card text-white bg-black mb-3 p-0 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
+            <div class="card-body karakterimgu" >
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b><br> ({{$waifu->sumber ?? "N/A"}})</p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5 class="card-title"><span class="d-none d-sm-block">Jumlah Klaim:</span> <span class=" "><i class="   far fa-check-circle"></i> <b class=" d-sm-none">Jumlah Klaim: </b>{{number_format($waifu->jumlah ?? 0)}}</span></h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5 class="card-title"><span class="d-none d-sm-block">Terakhir Diklaim:</span> <span class=""><i class="  far fa-clock"></i>  {{wib($waifu->updated_at) ?? "Tidak Pernah"}} WIB</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
     </div>
+
+   
+
     Copyright {{date("Y")}} himputek.id
     <br>
 </div>
 <br>
 
+<script>
+    function topglobal() {
+        $("#topglobalnav").addClass("active");
+        $("#topglobalnav").removeClass("text-white");
+        $("#latestnav").removeClass("active");
+        $("#latestnav").addClass("text-white");
+        $("#latest").hide();
+        $("#topglobal").show();
+        
+        
+    }
+    function latest() {
+        $("#topglobalnav").removeClass("active");
+        $("#topglobalnav").addClass("text-white");
+        $("#latestnav").addClass("active");
+        $("#latestnav").removeClass("text-white");
+        $("#topglobal").hide();
+        $("#latest").show();
+        
+    }
+
+    $( document ).ready(function() {
+   @if (session("fromKlaim",false))
+   latest();     
+   @endif
+});
+    </script>
 
 @include('footer')
