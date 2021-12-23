@@ -17,7 +17,7 @@ class KlaimController extends Controller
       
         $randomWaifu = Waifu::inRandomOrder()->take(1)->first();
         if (!session('sadap', false)) {
-            $cekSadap = Sadap::where(["ip"=> $uip , "ua" => $uua])->where("waifu_id","!=",null)->first();
+            $cekSadap = Sadap::where(["ip"=> $uip ])->where("waifu_id","!=",null)->first();
           
             if ($cekSadap) {
              session(['sudahklaim' => 'true']);
