@@ -54,8 +54,8 @@ class KlaimController extends Controller
             die("Hanya boleh klaim sekali");
         } 
         $this->validate($request, [
-            'nama' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
-            'sumber' => 'required|string|regex:/^[a-zA-Z0-9\s]+$/',
+            'nama' => "required|string|regex:/^[a-zA-Z0-9\s-]+$/",
+            'sumber' => "required|string|regex:/^[a-zA-Z0-9\s-]+$/",
             'captcha' => 'required|captcha',
             ]);
        
