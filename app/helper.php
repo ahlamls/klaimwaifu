@@ -124,7 +124,7 @@ function googleimagewaifu() {
     $waifus = Waifu::get();
     foreach ($waifus as $waifu) {
    
-    if ($waifu->gambar == null) {
+    if ($waifu->gambar == null OR $waifu->gambar == "") {
         fwrite(STDOUT, $waifu->nama . "(" . $waifu->sumber.")". "\n");
         $waifu->gambar = waifuimg($waifu->nama,$waifu->sumber);
         $waifu->save();
