@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Waifu;
 use App\Models\Sadap;
+use App\Models\KataTerlarang;
 use Illuminate\Http\Request;
 
 class KlaimController extends Controller
@@ -107,6 +108,18 @@ class KlaimController extends Controller
 
         if ($hekel) {
             die("Mau ngehek ya dek?");
+        }
+
+        //filteredString 
+        $filteredString = " " .strtolower($string) . " ";
+        $filteredString = str_replace("1","i",$filteredString);
+        $filteredString = str_replace("0","o",$filteredString);
+
+        $kataterlarangs = KataTerlarang::get();
+        foreach ($kataterlarangs as $kataterlarang) {
+            if (strpos($filteredString, strtolower($kataterlarang->kata)) !== false) {
+                die("Terdeteksi kata terlarang");
+            }
         }
 
         return substr(strip_tags($string),0,64);

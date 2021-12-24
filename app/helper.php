@@ -1,6 +1,7 @@
 <?php 
 use Carbon\Carbon;
 use App\Models\Waifu;
+use App\Models\KataTerlarang;
 if (!function_exists("wib")) {
     function wib($time ) {
         $korban = new Carbon($time);
@@ -60,6 +61,25 @@ function googleimagewaifu() {
         $waifu->save();
     
     }
+    }
+}
+
+function filterkatakasar() {
+      //filteredString 
+      $waifus = Waifu::get();
+      foreach ($waifus as $waifu) {
+          $string = $waifu->nama . " " . $waifu->sumber;
+      $filteredString = " " .strtolower($string) . " ";
+      $filteredString = str_replace("1","i",$filteredString);
+      $filteredString = str_replace("0","o",$filteredString);
+
+      $kataterlarangs = KataTerlarang::get();
+      foreach ($kataterlarangs as $kataterlarang) {
+          if (strpos($filteredString, strtolower($kataterlarang->kata)) !== false) {
+            fwrite(STDOUT, $waifu->nama . "(" . $waifu->sumber.")". "\n"); 
+            $waifu->delete();
+          }
+      }
     }
 }
 
