@@ -18,7 +18,7 @@ class KlaimController extends Controller
     }
        $uua =  $_SERVER['HTTP_USER_AGENT'];
        $pekalongan = false;
-        $waifu = Waifu::orderBy('jumlah', 'desc')->orderBy('updated_at', 'desc')->take(50)->get();
+        $waifu = Waifu::orderBy('jumlah', 'desc')->orderBy('updated_at', 'desc')->take(100)->get();
         $waifulatest = Waifu::orderBy('updated_at', 'desc')->take(50)->get();
       
         $randomWaifu = Waifu::inRandomOrder()->take(1)->first();

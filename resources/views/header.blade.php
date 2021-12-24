@@ -58,23 +58,15 @@
 .h-300 {
     height:300px;
 }
-@media only screen and (max-width: 600px) {
     .karakterimg {
         background: rgba(255,255,255,1); 
     background-size: cover !important;
  background-position: 50% 50%; background-repeat: no-repeat;
 }
-}
-@media only screen and (min-width: 600px) {
-    .karakterimg {
-        background: rgba(255,255,255,1); 
-    background-size: contain !important;
- background-position: 50% 50%; background-repeat: no-repeat;
-}
-}
+
 
 .karakterimgu {
-    background: rgba(0,0,0,0.6);    margin: -1px;
+    background: rgba(0,0,0,0.6);    margin: calc(-1px + -0.5rem);
 }
       </style>
   <body class="bg-dark text-white">

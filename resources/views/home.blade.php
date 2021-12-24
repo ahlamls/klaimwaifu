@@ -104,22 +104,24 @@ $es = "";
         kalau gak bisa berarti udah saya matiin karena bikin overload server mungkin ?
     -->
     <div class="row" >
-        @foreach ($waifulist as $waifu)
-        <div class="col-12 card text-white bg-black mb-3 p-0 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
+        @foreach ($waifulist as $index => $waifu)
+        <div class="col-12 col-md-4 p-1">
+        <div class=" card text-white bg-black mb-3  p-2 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
             <div class="card-body karakterimgu" >
                 <div class="row">
-                    <div class="col-12 col-md-4">
-                        <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b><br> ({{$waifu->sumber ?? "N/A"}})</p>
+                    <div class="col-12">
+                        <p class="card-title"><b>#{{$index + 1}}<br>{{$waifu->nama ?? "N/A"}}</b><br> ({{$waifu->sumber ?? "N/A"}})</p>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 ">
                         <h5 class="card-title"><span class="d-none d-sm-block">Jumlah Klaim:</span> <span class=" "><i class="   far fa-check-circle"></i> <b class=" d-sm-none">Jumlah Klaim: </b>{{number_format($waifu->jumlah ?? 0)}}</span></h5>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 ">
                         <h5 class="card-title"><span class="d-none d-sm-block">Terakhir Diklaim:</span> <span class=""><i class="  far fa-clock"></i>  {{wib($waifu->updated_at) ?? "Tidak Pernah"}} WIB</span></h5>
                     </div>
                 </div>
             </div>
         </div>
+</div>
         @endforeach
     </div>
     </div>
@@ -135,21 +137,23 @@ $es = "";
     -->
     <div class="row" >
         @foreach ($waifulistlatest as $waifu)
-        <div class="col-12 card text-white bg-black mb-3 p-0 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
+        <div class="col-12 col-md-4 p-1">
+        <div class=" card text-white bg-black mb-3  p-2 karakterimg" style='background: url(" {{$waifu->gambar ?? $es }} ") ' >
             <div class="card-body karakterimgu" >
                 <div class="row">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12">
                         <p class="card-title"><b>{{$waifu->nama ?? "N/A"}}</b><br> ({{$waifu->sumber ?? "N/A"}})</p>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12">
                         <h5 class="card-title"><span class="d-none d-sm-block">Jumlah Klaim:</span> <span class=" "><i class="   far fa-check-circle"></i> <b class=" d-sm-none">Jumlah Klaim: </b>{{number_format($waifu->jumlah ?? 0)}}</span></h5>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12">
                         <h5 class="card-title"><span class="d-none d-sm-block">Terakhir Diklaim:</span> <span class=""><i class="  far fa-clock"></i>  {{wib($waifu->updated_at) ?? "Tidak Pernah"}} WIB</span></h5>
                     </div>
                 </div>
             </div>
         </div>
+</div>
         @endforeach
     </div>
     </div>
