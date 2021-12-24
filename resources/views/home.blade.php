@@ -36,7 +36,7 @@ $es = "";
 </div>
 
  @endif
-  
+  @if ($nusantara)
     @if (!session('sudahklaim', false) )
     <form action="/klaim" method="POST">
         @csrf
@@ -78,6 +78,12 @@ $es = "";
 @endif
 </div>
     @endif
+    @else 
+    <div class="alert alert-warning" role="alert">
+  Mohon maaf untuk sementara Klaim waifu hanya tersedia di indonesia. Dari indonesia? PEKALONGAN LO GAK USAH PAKE VPN! 
+</div>
+    @endif
+
     <hr>
    <ul class="nav nav-tabs">
   <li class="nav-item">

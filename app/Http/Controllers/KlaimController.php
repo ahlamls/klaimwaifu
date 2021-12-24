@@ -10,6 +10,12 @@ class KlaimController extends Controller
     public function home() {
        //double klaim protection
        $uip = $this->get_client_ip();
+       $nusantara = true;
+       if ($uip != "UNKNOWN") {
+        if (ip_info($uip)["country"] != "Indonesia") {
+            $nusantara = false; // ROM GEMINK NIH BOSSSSSS
+        }
+    }
        $uua =  $_SERVER['HTTP_USER_AGENT'];
        $pekalongan = false;
         $waifu = Waifu::orderBy('jumlah', 'desc')->orderBy('updated_at', 'desc')->take(50)->get();
@@ -42,6 +48,7 @@ class KlaimController extends Controller
             "waifulistlatest" => $waifulatest,
             "randomWaifu" => $randomWaifu,
             "pekalongan" => $pekalongan,
+            "nusantara" => $nusantara,
         ]);
     }
     public function getWaifu() {
